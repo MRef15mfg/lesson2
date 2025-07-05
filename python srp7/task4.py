@@ -1,18 +1,9 @@
-text = input("Введіть текст: ")
+numbers = input("Введіть числа через пробіл: ")
+numbers = list(map(int, numbers.split()))
+even_indices = []
 
-if text:
-    text = text[0].upper() + text[1:]
+for i in range(len(numbers)):
+    if numbers[i] % 2 == 0:
+        even_indices.append(i)
 
-digits = 0
-punctuation = 0
-
-for ch in text:
-    if ch.isdigit():
-        digits += 1
-    elif ch in ".,!?:;-()\"'«»":
-        punctuation += 1
-
-print("Виправлений текст:", text)
-print("Кількість цифр:", digits)
-print("Кількість розділових знаків:", punctuation)
-print("Кількість знаків оклику:", text.count('!'))
+print(even_indices)
