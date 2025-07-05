@@ -1,0 +1,5 @@
+numbers = input("Введіть числа через пробіл: ")
+numbers_list = list(map(int, numbers.split()))
+num = int(input("Введіть число для пошуку: "))
+count = numbers_list.count(num)
+print("Кількість входжень:", count)
