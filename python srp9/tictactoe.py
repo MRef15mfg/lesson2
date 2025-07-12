@@ -1,16 +1,15 @@
 import numpy as np
 import os
 
-height = 5
-width = 5
+height, width = 5, 5
 field = np.full((height, width), " ", dtype=str)
 
 def place_numbers():
     pos_num = 1
-    field[:, 1] = "█"
-    field[:, 3] = "█"
-    field[1, :] = "█"
-    field[3, :] = "█"
+    field[:, 1] = "│"
+    field[:, 3] = "│"
+    field[1, :] = "─"
+    field[3, :] = "─"
     for i in range(height):
         for q in range(width):
             if field[i, q] == " ":
@@ -19,21 +18,23 @@ def place_numbers():
 
 def display_field():
     os.system("cls" if os.name == "nt" else "clear")
+    print("\n     Tic-Tac-Toe\n")
     for row in field:
-        print("".join(row))
+        print("  " + " ".join(f"{c:^3}" for c in row))
 
 def get_move(turn):
     symbol = "X" if turn % 2 == 0 else "O"
     while True:
-        user = input(f"Player {symbol}, choose a cell (1-9): ")
+        user = input(f"\nPlayer {symbol}, choose a cell (1-9): ").strip()
         if not user.isdigit():
+            print("  Please enter a number.")
             continue
         for i in range(height):
             for q in range(width):
                 if field[i, q] == user:
                     field[i, q] = symbol
                     return True
-        print("Invalid move. Try again.")
+        print("  Invalid move. Try again.")
 
 def check_win():
     wins = [
@@ -62,10 +63,10 @@ while True:
     winner = check_win()
     if winner:
         display_field()
-        print(f"Player {winner} wins!")
+        print(f"\nPlayer {winner} wins!")
         break
     turn += 1
     if turn >= 9:
         display_field()
-        print("Draw!")
+        print("\nIt's a draw!")
         break
