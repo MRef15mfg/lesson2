@@ -1,5 +1,6 @@
 import numpy as np
 import os
+from colorama import *
 
 height, width = 5, 5
 field = np.full((height, width), " ", dtype=str)
@@ -49,7 +50,7 @@ def check_win():
     ]
     for combo in wins:
         cells = [field[i, q] for i, q in combo]
-        if cells[0] in ['X', 'O'] and all(cell == cells[0] for cell in cells):
+        if cells[0] in ['X', '○'] and all(cell == cells[0] for cell in cells):
             return cells[0]
     return None
 
@@ -63,7 +64,8 @@ while True:
     winner = check_win()
     if winner:
         display_field()
-        print(f"\nPlayer {winner} wins!")
+        print(Fore.GREEN + f"\nPlayer {winner} wins!")
+        os.system("open https://www.youtube.com/watch?v=gieQh1E0b4o")
         break
     turn += 1
     if turn >= 9:
